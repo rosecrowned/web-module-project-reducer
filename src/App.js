@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import reducer from './reducers/index';
 import { initialState } from './reducers/index';
-import { addOne, applyNumber, changeOperation, clearDisplay } from './actions';
+import { addMemory, addOne, applyNumber, changeOperation, clearDisplay, setMemory, clearMemory } from './actions';
 
 import './App.css';
 
@@ -33,6 +33,21 @@ function App() {
     dispatch(clearDisplay())
   }
 
+  //set m+
+  const handleSetMemory = (total) => {
+    dispatch(setMemory(total))
+  }
+
+  //add memory to current total
+  const handleAddTotal = (memory, total) => {
+    dispatch(addMemory())
+  }
+
+  //clear memory back to 0 (initial state)
+  const handleClearMemory = () => {
+    dispatch(clearMemory())
+  }
+
     //testing outputs
     console.log(state)
     console.log(state.memory)
@@ -56,9 +71,9 @@ function App() {
             </div>
             
             <div className="row">
-              <CalcButton value={"M+"}/>
-              <CalcButton value={"MR"}/>
-              <CalcButton value={"MC"}/>
+              <CalcButton onClick={handleSetMemory} value={"M+"}/>
+              <CalcButton onClick={handleAddTotal} value={"MR"}/>
+              <CalcButton onClick={handleClearMemory} value={"MC"}/>
             </div>
 
             <div className="row">
